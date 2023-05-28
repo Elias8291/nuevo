@@ -16,7 +16,6 @@ import javax.swing.table.DefaultTableModel;
  */
 public class edades extends javax.swing.JFrame {
 
-    Conexion con = new Conexion();
     conexcion_edades ed = new conexcion_edades();
     DefaultTableModel model = new DefaultTableModel();
 

@@ -4,17 +4,60 @@
  */
 package vista;
 
+import inegi.control.conexcion_edades;
+import inegi.control.conexcion_habitantes;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author chave
  */
 public class habitantes extends javax.swing.JFrame {
 
+    conexcion_habitantes ed = new conexcion_habitantes();
+    DefaultTableModel model = new DefaultTableModel();
+
     /**
      * Creates new form habitantes
      */
     public habitantes() {
         initComponents();
+        cargar();
+        action();
+    }
+
+    public void cargar() {
+        ed.caragrDatos(tabla_habitantes, model);
+    }
+
+    public void action() {
+
+        tabla_habitantes.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                // Verificar que se haya seleccionado una fila y no múltiples filas
+                if (!e.getValueIsAdjusting() && tabla_habitantes.getSelectedRowCount() == 1) {
+                    int filaSeleccionada = tabla_habitantes.getSelectedRow();
+                    // Obtener los datos de la fila seleccionada
+                    Object id_entidad = tabla_habitantes.getValueAt(filaSeleccionada, 0);
+                    Object id_municipio = tabla_habitantes.getValueAt(filaSeleccionada, 1);
+                    Object habitantes = tabla_habitantes.getValueAt(filaSeleccionada, 2);
+                    Object hombres = tabla_habitantes.getValueAt(filaSeleccionada, 3);
+                    Object mujeres = tabla_habitantes.getValueAt(filaSeleccionada, 4);
+
+                    // Asignar los datos a los cuadros de texto
+                    jTextField2.setText(id_entidad.toString());
+                    jTextField3.setText(id_municipio.toString());
+                   jTextField5.setText(habitantes.toString());
+                    jTextField6.setText(hombres.toString());
+                    jTextField4.setText(mujeres .toString());
+
+                }
+            }
+        });
+
     }
 
     /**
@@ -28,7 +71,7 @@ public class habitantes extends javax.swing.JFrame {
 
         jTextField1 = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla_habitantes = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -51,8 +94,8 @@ public class habitantes extends javax.swing.JFrame {
         jTextField1.setForeground(new java.awt.Color(204, 204, 204));
         jTextField1.setText("HABITANTES");
 
-        jTable1.setBackground(new java.awt.Color(204, 204, 255));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_habitantes.setBackground(new java.awt.Color(204, 204, 255));
+        tabla_habitantes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -63,7 +106,7 @@ public class habitantes extends javax.swing.JFrame {
                 "Entidad", "Municipio", "Habitantes", "Hombres", "Mujeres"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tabla_habitantes);
 
         jLabel1.setText("Entidad");
 
@@ -212,12 +255,12 @@ public class habitantes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
+    private javax.swing.JTable tabla_habitantes;
     // End of variables declaration//GEN-END:variables
 }
