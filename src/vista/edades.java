@@ -421,7 +421,26 @@ public class edades extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        ed.insertData(jTextField2.getText(),
+                jTextField3.getText(),
+                Integer.parseInt(jTextField4.getText()),
+                Integer.parseInt(jTextField5.getText()),
+                Integer.parseInt(jTextField6.getText()),
+                Integer.parseInt(jTextField7.getText()),
+                Integer.parseInt(jTextField8.getText()),
+                Integer.parseInt(jTextField9.getText()),
+                Integer.parseInt(jTextField10.getText()),
+                Integer.parseInt(jTextField11.getText()),
+                Integer.parseInt(jTextField12.getText()),
+                Integer.parseInt(jTextField13.getText()),
+                Integer.parseInt(jTextField14.getText()),
+                Integer.parseInt(jTextField15.getText()),
+                Integer.parseInt(jTextField16.getText()),
+                Integer.parseInt(jTextField17.getText()),
+                Integer.parseInt(jTextField18.getText()),
+                Integer.parseInt(jTextField19.getText()),
+                Integer.parseInt(jTextField20.getText()),
+                Integer.parseInt(jTextField21.getText()), jTextField22.getText());
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

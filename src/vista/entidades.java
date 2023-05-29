@@ -5,6 +5,7 @@
 package vista;
 
 import inegi.control.conexcion_entidades;
+import java.awt.TextField;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -21,17 +22,31 @@ public class entidades extends javax.swing.JFrame {
      */
     conexcion_entidades clasesEnti = new conexcion_entidades();
     DefaultTableModel model = new DefaultTableModel();
+    String[] columnNames = {
+        "id_entidad",
+        "nom_entidad",
+        "abreviatura",
+        "nom_capital"
+    };
 
     public entidades() {
         initComponents();
+        nombresJtable();
         cargardatos();
         action();
+        
+    }
+    
+    public void nombresJtable(){
+    for (String nombre : columnNames) {
+            model.addColumn(nombre);
+        }
     }
 
     public void cargardatos() {
         clasesEnti.caragrDatos(tabla_entidades, model);
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -87,10 +102,25 @@ public class entidades extends javax.swing.JFrame {
         jLabel4.setText("Nom_capital");
 
         jButton1.setText("Insertar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Actualizar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,6 +193,22 @@ public class entidades extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        clasesEnti.insertData(jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText());
+        clasesEnti.caragrDatos(tabla_entidades, model);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        clasesEnti.eliminarRegistro(jTextField2.getText());
+         cargardatos();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here
+        clasesEnti.modificarRegistro(jTextField2.getText(), jTextField3.getText(), jTextField4.getText(), jTextField5.getText());
+        cargardatos();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
