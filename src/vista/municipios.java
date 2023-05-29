@@ -19,7 +19,8 @@ public class municipios extends javax.swing.JFrame {
     conexion_municipio ed = new conexion_municipio();
     DefaultTableModel model = new DefaultTableModel();
     String[] columnNames = {
-        "id_entidad", "id_municipio", "nom_municipio", "nom_cabecera"
+        "id_entidad", "id_municipio", "nom_municipio", "nom_cabeceras"
+            
     };
 
     /**
