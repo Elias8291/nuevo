@@ -50,8 +50,49 @@ public class conexion_conteo2005 {
         }
 
     }
-
     
-    
+    public void insertData(int id_entidad, int id_municipio, String pob_total, String pob_masculina, String pob_femenina, String tot_vivienda ) {
+        try {
+            PreparedStatement pstm = con.getConnection().prepareStatement("INSERT INTO conteo2005(id_entidad, id_municipio, pob_total, pob_masculina,pob_femenina, tot_vivienda ) VALUES (?, ?, ?, ?, ?, ?)");
+            pstm.setInt(1, id_entidad);
+            pstm.setInt(2, id_municipio);
+            pstm.setString(3, pob_total);
+            pstm.setString(4, pob_masculina);
+            pstm.setString(5, pob_femenina);
+            pstm.setString(6, tot_vivienda);
+            pstm.execute();
+            pstm.close();
 
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+ public void eliminarRegistro(int idEntidad, int idMunicipio) {
+        try {
+            PreparedStatement pstm = con.getConnection().prepareStatement("DELETE FROM habitantes WHERE id_entidad = ? AND id_municipio = ?");
+            pstm.setInt(1, idEntidad);
+            pstm.setInt(2, idMunicipio);
+            pstm.execute();
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+ 
+ public void modificarRegistro(String id_entidad, String id_municipio, int pob_total, int pob_masculina, int pob_femenina, int tot_vivienda) {
+        try {
+            PreparedStatement pstm = con.getConnection().prepareStatement("UPDATE habitantes SET habitantes = ?, hombres = ?, mujeres = ? WHERE id_entidad = ? AND id_municipio = ?");
+
+            pstm.setInt(1, pob_total);
+            pstm.setInt(2, pob_masculina);
+            pstm.setInt(3, pob_femenina);
+            pstm.setInt(4, tot_vivienda);
+            pstm.setString(5, id_entidad);
+            pstm.setString(6, id_municipio);
+            pstm.execute();
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 }

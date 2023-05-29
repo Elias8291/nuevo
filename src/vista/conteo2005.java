@@ -15,6 +15,10 @@ public class conteo2005 extends javax.swing.JFrame {
 
     conexion_conteo2005 ed = new conexion_conteo2005();
     DefaultTableModel model = new DefaultTableModel();
+    
+    String[] columnNames = {
+        "id_entidad", "id_municipio", "pob_total", "pob_masculina", "pob_femenina", "tot_vivienda"
+    };
 
     public conteo2005() {
         initComponents();
