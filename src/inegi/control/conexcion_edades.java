@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 public class conexcion_edades {
 
     Conexion con;
-    String[] columnNames = {"id_entida",
+    String[] columnNames = {"id_entidas",
         "id_municipio",
         "e0_4",
         "e5_9",
