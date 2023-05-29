@@ -12,9 +12,6 @@ import javax.swing.table.DefaultTableModel;
 public class conexion_municipio {
 
     Conexion con;
-    String[] columnNames = {
-        "id_entidad", "id_municipio", "nom_municipio", "nom_cabecera"
-    };
 
     public conexion_municipio() {
         con = new Conexion();
@@ -22,11 +19,8 @@ public class conexion_municipio {
     }
 
     public void caragrDatos(JTable tblDatos, DefaultTableModel modelo) {
-
-        for (String nombre : columnNames) {
-            modelo.addColumn(nombre);
-        }
-
+        modelo.setRowCount(0);
+        modelo.fireTableDataChanged();
         String datos[] = new String[8];
 
         try {
@@ -49,6 +43,47 @@ public class conexion_municipio {
 
     }
 
-    
+    public void insertData(int id_entidad, int idMunicipio, String nomMunicipio, String nomCabecera) {
+        try {
+            PreparedStatement pstm = con.getConnection().prepareStatement("INSERT INTO municipios (id_entidad, id_municipio, nom_municipio, nom_cabecera) VALUES (?, ?, ?, ?)");
+            pstm.setInt(1, id_entidad);
+            pstm.setInt(2, idMunicipio);
+            pstm.setString(3, nomMunicipio);
+            pstm.setString(4, nomCabecera);
+
+            pstm.execute();
+            pstm.close();
+
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+
+    public void eliminarRegistro(int idEntidad,int idMunicipio) {
+        try {
+            PreparedStatement pstm = con.getConnection().prepareStatement("DELETE FROM municipios WHERE id_entidad = ? AND id_municipio = ?");
+            pstm.setInt(1, idEntidad);
+            pstm.setInt(2, idMunicipio);
+            pstm.execute();
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    public void modificarRegistro(int id_entidad, int idMunicipio, String nomMunicipio, String nomCabecera) {
+        try {
+            PreparedStatement pstm = con.getConnection().prepareStatement("UPDATE municipios SET nom_municipio = ?, nom_cabecera = ? WHERE id_entidad = ? AND id_municipio = ?");
+
+            pstm.setString(1, nomMunicipio);
+            pstm.setString(2, nomCabecera);
+            pstm.setInt(3, id_entidad);
+            pstm.setInt(4, idMunicipio);
+
+            pstm.execute();
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
 }
