@@ -259,6 +259,8 @@ public class conteo2005 extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        ed.insertData(Integer.parseInt(txt_1.getText()),Integer.parseInt(txt_2.getText()),txt_3.getText(),txt_4.getText(),txt_5.getText(),txt_6.getText());
+         ed.caragrDatos(tabla_conteo, model);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -275,10 +277,14 @@ public class conteo2005 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+         ed.modificarRegistro(txt_1.getText(),txt_2.getText(),Integer.parseInt(txt_3.getText()),Integer.parseInt(txt_5.getText()),Integer.parseInt(txt_1.getText()),Integer.parseInt(txt_6.getText()));
+        ed.caragrDatos(tabla_conteo, model);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+          ed.eliminarRegistro(Integer.parseInt(txt_1.getText()),Integer.parseInt(txt_2.getText()));
+        ed.caragrDatos(tabla_conteo, model);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
