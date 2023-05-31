@@ -260,7 +260,7 @@ public class habitantes extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        ed.modificarRegistro(txt_1.getText(),txt_2.getText(),Integer.parseInt(txt_3.getText()),Integer.parseInt(txt_5.getText()),Integer.parseInt(txt_1.getText()) );
+        ed.modificarRegistro(txt_1.getText(),txt_2.getText(),Integer.parseInt(txt_3.getText()),Integer.parseInt(txt_4.getText()),Integer.parseInt(txt_5.getText()) );
         ed.caragrDatos(tabla_habitantes, model);
     }//GEN-LAST:event_jButton2ActionPerformed
 

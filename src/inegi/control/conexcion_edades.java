@@ -12,28 +12,6 @@ import javax.swing.table.DefaultTableModel;
 public class conexcion_edades {
 
     Conexion con;
-    String[] columnNames = {"id_entidas",
-        "id_municipio",
-        "e0_4",
-        "e5_9",
-        "e10_14",
-        "e15_19",
-        "e20_24",
-        "e25_29",
-        "e30_34",
-        "e35_39",
-        "e40_44",
-        "e45_49",
-        "e50_54",
-        "e55_59",
-        "e60_64",
-        "e65_69",
-        "e70_74",
-        "e75_79",
-        "e80_84",
-        "e85",
-        "no_espec"
-    };
 
     public conexcion_edades() {
         con = new Conexion();
@@ -43,13 +21,11 @@ public class conexcion_edades {
     public void caragrDatos(JTable tblDatos, DefaultTableModel modelo) {
 
         
-        for (String nombre :columnNames) {
-            modelo.addColumn(nombre);
-        }
 
-
+        modelo.setRowCount(0);
+        modelo.fireTableDataChanged();
         String datos[] = new String[21];
- 
+
         try {
 
             PreparedStatement pstm = con.getConnection().prepareStatement("select * from edades");
@@ -79,16 +55,15 @@ public class conexcion_edades {
                 datos[20] = resultado.getString("no_espec");
                 modelo.addRow(datos);
             }
-           tblDatos.setModel(modelo);
-           
+            tblDatos.setModel(modelo);
 
         } catch (Exception e) {
-            System.out.println("eror"+e);
+            System.out.println("eror" + e);
         }
 
     }
 
-     public void insertData(String id_entidad, String id_municipio, int e0_4, int e5_9, int e10_14, int e15_19, int e20_24, int e25_29, int e30_34, int e35_39, int e40_44, int e45_49, int e50_54, int e55_59, int e60_64, int e65_69, int e70_74, int e75_79, int e80_84, int e85, String no_espec) {
+    public void insertData(String id_entidad, String id_municipio, int e0_4, int e5_9, int e10_14, int e15_19, int e20_24, int e25_29, int e30_34, int e35_39, int e40_44, int e45_49, int e50_54, int e55_59, int e60_64, int e65_69, int e70_74, int e75_79, int e80_84, int e85, String no_espec) {
         try {
             PreparedStatement pstm = con.getConnection().prepareStatement("INSERT INTO edades (id_entidad, id_municipio, e0_4, e5_9, e10_14, e15_19, e20_24, e25_29, e30_34, e35_39, e40_44, e45_49, e50_54, e55_59, e60_64, e65_69, e70_74, e75_79, e80_84, e85, no_espec) "
                     + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
@@ -114,6 +89,7 @@ public class conexcion_edades {
             pstm.setInt(19, e80_84);
             pstm.setInt(20, e85);
             pstm.setString(21, no_espec);
+
             pstm.executeUpdate();
             pstm.execute();
             pstm.close();
@@ -121,6 +97,50 @@ public class conexcion_edades {
             System.out.println(e);
         }
     }
-   
+
+    public void ActualizarRegistro(String id_entidad, String id_municipio, int e0_4, int e5_9, int e10_14, int e15_19, int e20_24, int e25_29, int e30_34, int e35_39, int e40_44, int e45_49, int e50_54, int e55_59, int e60_64, int e65_69, int e70_74, int e75_79, int e80_84, int e85, String no_espec) {
+        try {
+            PreparedStatement pstm = con.getConnection().prepareStatement("UPDATE edades SET e0_4 = ?, e5_9 = ?, e10_14 = ?, e15_19 = ?, e20_24 = ?, e25_29 = ?, "
+                    + "e30_34 = ?, e35_39 = ?, e40_44 = ?, e45_49 = ?, e50_54 = ?, e55_59 = ?, e60_64 = ?, e65_69 = ?, "
+                    + "e70_74 = ?, e75_79 = ?, e80_84 = ?, e85 = ?, no_espec = ? WHERE id_entidad = ? AND id_municipio = ?");
+            pstm.setInt(1, e0_4);
+            pstm.setInt(2, e5_9);
+            pstm.setInt(3, e10_14);
+            pstm.setInt(4, e15_19);
+            pstm.setInt(5, e20_24);
+            pstm.setInt(6, e25_29);
+            pstm.setInt(7, e30_34);
+            pstm.setInt(8, e35_39);
+            pstm.setInt(9, e40_44);
+            pstm.setInt(10, e45_49);
+            pstm.setInt(11, e50_54);
+            pstm.setInt(12, e55_59);
+            pstm.setInt(13, e60_64);
+            pstm.setInt(14, e65_69);
+            pstm.setInt(15, e70_74);
+            pstm.setInt(16, e75_79);
+            pstm.setInt(17, e80_84);
+            pstm.setInt(18, e85);
+            pstm.setString(19, no_espec);
+            pstm.setString(20, id_entidad);
+            pstm.setString(21, id_municipio);
+            pstm.execute();
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
+    
+     public void eliminarRegistro(String idEntidad,String idMunicipio) {
+        try {
+            PreparedStatement pstm = con.getConnection().prepareStatement("DELETE FROM edades WHERE id_entidad = ? AND id_municipio = ?");
+            pstm.setString(1, idEntidad);
+            pstm.setString(2, idMunicipio);
+            pstm.execute();
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println(e);
+        }
+    }
 
 }

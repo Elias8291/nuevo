@@ -16,8 +16,15 @@ public class conteo2005 extends javax.swing.JFrame {
     conexion_conteo2005 ed = new conexion_conteo2005();
     DefaultTableModel model = new DefaultTableModel();
 
+    
+
+    String[] columnNames = {
+        "id_entidad", "id_municipio", "pob_total", "pob_masculina", "pob_femenina", "tot_vivienda"
+    };
+
     public conteo2005() {
         initComponents();
+        ColumnName();
         cargar();
         action();
 
@@ -25,6 +32,13 @@ public class conteo2005 extends javax.swing.JFrame {
 
     public void cargar() {
         ed.caragrDatos(tabla_conteo, model);
+    }
+
+    public void ColumnName() {
+        for (String nombre : columnNames) {
+            model.addColumn(nombre);
+        }
+
     }
 
     public void action() {
@@ -49,7 +63,7 @@ public class conteo2005 extends javax.swing.JFrame {
                     txt_3.setText(pob_total.toString());
                     txt_4.setText(pob_masculina.toString());
                     txt_5.setText(pob_femenina.toString());
-                     txt_6.setText(tot_vivienda.toString().toString());
+                    txt_6.setText(tot_vivienda.toString().toString());
                 }
             }
         });
@@ -254,7 +268,12 @@ public class conteo2005 extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+
+        ed.insertData(txt_1.getText(), txt_2.getText(), Integer.parseInt(txt_3.getText()), Integer.parseInt(txt_4.getText()), Integer.parseInt(txt_5.getText()), Integer.parseInt(txt_6.getText()));
+        ed.caragrDatos(tabla_conteo, model);
+
+// TODO add your handling code here:
+
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -271,10 +290,19 @@ public class conteo2005 extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+
+        ed.modificarRegistro(txt_1.getText(), txt_2.getText(), Integer.parseInt(txt_3.getText()), Integer.parseInt(txt_4.getText()), Integer.parseInt(txt_5.getText()), Integer.parseInt(txt_6.getText()));
+
+        ed.caragrDatos(tabla_conteo, model);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+
+   
+          ed.eliminarRegistro(Integer.parseInt(txt_1.getText()),Integer.parseInt(txt_2.getText()));
+
+        ed.caragrDatos(tabla_conteo, model);
     }//GEN-LAST:event_jButton3ActionPerformed
 
     /**

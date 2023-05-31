@@ -18,12 +18,38 @@ public class edades extends javax.swing.JFrame {
 
     conexcion_edades ed = new conexcion_edades();
     DefaultTableModel model = new DefaultTableModel();
+    
+        String[] columnNames = {"id_entidas",
+        "id_municipio",
+        "e0_4",
+        "e5_9",
+        "e10_14",
+        "e15_19",
+        "e20_24",
+        "e25_29",
+        "e30_34",
+        "e35_39",
+        "e40_44",
+        "e45_49",
+        "e50_54",
+        "e55_59",
+        "e60_64",
+        "e65_69",
+        "e70_74",
+        "e75_79",
+        "e80_84",
+        "e85",
+        "no_espec"
+    };
+
+    
 
     /**
      * Creates new form edades
      */
     public edades() {
         initComponents();
+        columName();
         cargardatos();
     }
 
@@ -31,6 +57,13 @@ public class edades extends javax.swing.JFrame {
         ed.caragrDatos(Tabla_edades, model);
         action();
 
+    }
+    
+    public void columName(){
+    for (String nombre : columnNames) {
+            model.addColumn(nombre);
+        }
+    
     }
 
     public void action() {
@@ -239,6 +272,11 @@ public class edades extends javax.swing.JFrame {
         });
 
         jButton3.setText("Eliminar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -441,10 +479,32 @@ public class edades extends javax.swing.JFrame {
                 Integer.parseInt(jTextField19.getText()),
                 Integer.parseInt(jTextField20.getText()),
                 Integer.parseInt(jTextField21.getText()), jTextField22.getText());
+        ed.caragrDatos(Tabla_edades, model);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        ed.ActualizarRegistro(jTextField2.getText(),
+                jTextField3.getText(),
+                Integer.parseInt(jTextField4.getText()),
+                Integer.parseInt(jTextField5.getText()),
+                Integer.parseInt(jTextField6.getText()),
+                Integer.parseInt(jTextField7.getText()),
+                Integer.parseInt(jTextField8.getText()),
+                Integer.parseInt(jTextField9.getText()),
+                Integer.parseInt(jTextField10.getText()),
+                Integer.parseInt(jTextField11.getText()),
+                Integer.parseInt(jTextField12.getText()),
+                Integer.parseInt(jTextField13.getText()),
+                Integer.parseInt(jTextField14.getText()),
+                Integer.parseInt(jTextField15.getText()),
+                Integer.parseInt(jTextField16.getText()),
+                Integer.parseInt(jTextField17.getText()),
+                Integer.parseInt(jTextField18.getText()),
+                Integer.parseInt(jTextField19.getText()),
+                Integer.parseInt(jTextField20.getText()),
+                Integer.parseInt(jTextField21.getText()), jTextField22.getText());
+        ed.caragrDatos(Tabla_edades, model);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
@@ -454,6 +514,13 @@ public class edades extends javax.swing.JFrame {
     private void Tabla_edadesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Tabla_edadesMouseClicked
 
     }//GEN-LAST:event_Tabla_edadesMouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+        ed.eliminarRegistro(jTextField2.getText(),
+                jTextField3.getText());
+        ed.caragrDatos(Tabla_edades, model);
+    }//GEN-LAST:event_jButton3ActionPerformed
 
     /**
      * @param args the command line arguments
