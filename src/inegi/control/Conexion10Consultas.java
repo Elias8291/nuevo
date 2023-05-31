@@ -239,7 +239,7 @@ public class Conexion10Consultas {
             ResultSet resultado = pstm.executeQuery();
 
             while (resultado.next()) {
-              String nomMunicipio = resultado.getString("nom_municipio");
+                String nomMunicipio = resultado.getString("nom_municipio");
                 int cantidadHabitantes = resultado.getInt("habitantes");
                 int sumaEdades = resultado.getInt("suma_edades");
                 modelo.addRow(new Object[]{nomMunicipio, cantidadHabitantes, sumaEdades});
@@ -251,7 +251,7 @@ public class Conexion10Consultas {
         }
 
     }
-    
+
     public void consulta9(JTable tblDatos, DefaultTableModel modelo) {
 
         modelo.setRowCount(0);
@@ -259,21 +259,47 @@ public class Conexion10Consultas {
         tblDatos.revalidate();
         modelo.setColumnIdentifiers(new Vector<>());
         tblDatos.getTableHeader().repaint();
-        modelo.addColumn("Nombre Municipio");
-        modelo.addColumn("Cantidad de Habitantes");
-        modelo.addColumn("Suma de Edades");
+        modelo.addColumn("Nombre Entidad");
+        modelo.addColumn("Suma Total");
 
         try {
 
-            PreparedStatement pstm = con.getConnection().prepareStatement("SELECT municipios.nom_municipio, habitantes.habitantes, SUM(edades.e20_24 + edades.e25_29 + edades.e30_34 + edades.e35_39 + edades.e40_44) AS suma_edades FROM edades INNER JOIN municipios ON municipios.id_municipio = edades.id_municipio INNER JOIN habitantes ON habitantes.id_municipio = municipios.id_municipio AND habitantes.id_entidad = municipios.id_entidad WHERE habitantes.habitantes >= 1000000 GROUP BY municipios.nom_municipio, habitantes.habitantes");
+            PreparedStatement pstm = con.getConnection().prepareStatement("SELECT entidades.nom_entidad, SUM(edades.e20_24) + SUM(edades.e25_29) + SUM(edades.e30_34) + SUM(edades.e35_39) + SUM(edades.e40_44) AS SumaT FROM entidades JOIN edades ON entidades.id_entidad = edades.id_entidad JOIN habitantes ON edades.id_entidad = habitantes.id_entidad AND edades.id_municipio = habitantes.id_municipio GROUP BY entidades.nom_entidad HAVING SUM(habitantes.habitantes) > 5000000");
             ResultSet resultado = pstm.executeQuery();
 
             while (resultado.next()) {
-              String nomMunicipio = resultado.getString("nom_municipio");
-                int cantidadHabitantes = resultado.getInt("habitantes");
-                int sumaEdades = resultado.getInt("suma_edades");
-                modelo.addRow(new Object[]{nomMunicipio, cantidadHabitantes, sumaEdades});
+                String nomEntidad = resultado.getString("nom_entidad");
+                int sumaTotal = resultado.getInt("SumaT");
+                modelo.addRow(new Object[]{nomEntidad, sumaTotal});
             }
+            tblDatos.setModel(modelo);
+
+        } catch (Exception e) {
+            System.out.println("eror" + e);
+        }
+
+    }
+
+    public void consulta10(JTable tblDatos, DefaultTableModel modelo) {
+
+        modelo.setRowCount(0);
+        modelo.fireTableDataChanged();
+        tblDatos.revalidate();
+        modelo.setColumnIdentifiers(new Vector<>());
+        tblDatos.getTableHeader().repaint();
+        modelo.addColumn("Nombre Entidad");
+        modelo.addColumn("Nombre Municipio");
+
+        try {
+
+            PreparedStatement pstm = con.getConnection().prepareStatement("SELECT entidades.nom_entidad, municipios.nom_municipio FROM entidades JOIN municipios ON entidades.id_entidad = municipios.id_entidad ORDER BY LENGTH(municipios.nom_municipio) ASC LIMIT 1;");
+            ResultSet resultado = pstm.executeQuery();
+
+             while (resultado.next()) {
+                String nomEntidad = resultado.getString("nom_entidad");
+                String nomMunicipio = resultado.getString("nom_municipio");
+                modelo.addRow(new Object[]{nomEntidad, nomMunicipio});
+            } 
             tblDatos.setModel(modelo);
 
         } catch (Exception e) {
