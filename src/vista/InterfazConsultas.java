@@ -165,30 +165,41 @@ public class InterfazConsultas extends javax.swing.JFrame {
                 consultas.consulta3(tabla_entidades, model);
                 break;
             case 3:
+                TXT_TITULO.setText("");
+                TXT_TITULO.setText("Promedio de habitantes en el estado de Puebla");
                 consultas.consulta4(tabla_entidades, model);
                 break;
             case 4:
+                TXT_TITULO.setText("");
+                TXT_TITULO.setText("Entidad federativa con menor población de habitantes entre los 0 y 14 años");
                 consultas.consulta5(tabla_entidades, model);
                 break;
             case 5:
+                TXT_TITULO.setText("");
+                TXT_TITULO.setText("entidades las entidades que tiene menos de 40 municipios");
                 consultas.consulta6(tabla_entidades, model);
                 break;
             case 6:
+                TXT_TITULO.setText("");
+                TXT_TITULO.setText("Municipios existe el menor número de habitantes");
                 consultas.consulta7(tabla_entidades, model);
-                System.out.println("Acción para la opción 3");
+
                 break;
             case 7:
-                // Acción para la opción 3
+                TXT_TITULO.setText("");
+                TXT_TITULO.setText("Población de 20 a 44 años únicamente de los municipios con población mayor a 1 millón");
                 consultas.consulta8(tabla_entidades, model);
-                System.out.println("Acción para la opción 3");
+
                 break;
             case 8:
-                // Acción para la opción 3
+                TXT_TITULO.setText("");
+                TXT_TITULO.setText("Población de 20 a 44 años de las entidades con población mayor a 5 millones");
                 consultas.consulta9(tabla_entidades, model);
-                System.out.println("Acción para la opción 3");
                 break;
             case 9:
-               consultas.consulta10(tabla_entidades, model);
+                TXT_TITULO.setText("");
+                TXT_TITULO.setText("Municipio del país con el nombre más corto? Proyectar la entidad y el nombre del municipio");
+                consultas.consulta10(tabla_entidades, model);
                 break;
 
         }
